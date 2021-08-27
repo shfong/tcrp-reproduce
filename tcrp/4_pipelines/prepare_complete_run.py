@@ -23,16 +23,18 @@ def make_chunks(iterable, nchunks):
 
 filepath = os.path.realpath(__file__)
 dirname = os.path.dirname(filepath)
+home_dir = os.path.dirname(os.path.dirname(dirname))
+print home_dir
 
 n_gpus = 20
 
 run_name = "210803_drug-baseline-models"
-out_directory = dirname + '/output/' + run_name
+out_directory = home_dir + '/output/' + run_name
 task_directory = out_directory + '/' + "tasks"
 
 os.system("mkdir -p {}".format(task_directory))
 
-drugs = glob("data/cell_line_lists/*.pkl")
+drugs = glob(home_dir + "/data/cell_line_lists/*.pkl")
 drugs = [drug.split('/')[-1].split('_tissue_cell_line_list.pkl')[0] for drug in drugs]
 
 with open('priority_drugs') as f: 
@@ -60,12 +62,15 @@ for i, (a, b) in enumerate(zip(priority_chunked, remaining_drugs_chunked)):
     with open(drug_input_file, 'w') as f: 
         f.write('\n'.join(_drugs))
 
-    # cmd = ['python', 'generate_MAML_job_cv.py', '--run_name', run_name, '--drug_list_file', drug_input_file, '--job_id', str(i), '--job', 'drugs']
-    # cmd = ' '.join(cmd)
-    # print cmd
-    # os.system(cmd)
-
-    cmd = ['python', 'generate_baseline_job_cv.py', '--run_name', run_name, '--drug_list_file', drug_input_file, '--job_id', str(i), '--job', 'drugs', '--fewshot_data_path', fewshot_data_path]
+    cmd = ['python', 'generate_MAML_job_cv.py', '--run_name', run_name, '--drug_list_file', drug_input_file, '--job_id', str(i), '--job', 'drugs']
     cmd = ' '.join(cmd)
     print cmd
     os.system(cmd)
+
+    cmd = ['python', dirname + '/generate_baseline_job_cv.py', '--run_name', run_name, '--drug_list_file', drug_input_file, '--job_id', str(i), '--job', 'drugs', '--fewshot_data_path', fewshot_data_path]
+    cmd = ' '.join(cmd)
+    print cmd
+    os.system(cmd)
+
+
+
