@@ -16,14 +16,12 @@ parser.add_argument('--run_name', default='run')
 args = parser.parse_args()
 drug_list_file, job, job_id = args.drug_list_file, args.job, args.job_id
 
-
-#work_dic = '/share/data/jinbodata/siqi/Drug_data/'
-#work_dic = '/share/data/jinbodata/siqi/mut_exp_cnv_data/challenge_1b/'
-#work_dic = '/cellar/users/samsonfong/Projects/tcrp-v2/from-ma/cell_line_lists/'
-work_dic = '/mnt/beegfs/users/shfong/projects/TCRP-refactored/tcrp-original/data/cell_line_lists/'
 filepath = os.path.realpath(__file__)
 dir_name = os.path.dirname(filepath)
-job_directory = dir_name + '/output/{}/'.format(args.run_name)
+home_dir = os.path.dirname(os.path.dirname(dir_name))
+print home_dir
+work_dic = home_dir + '/data/cell_line_lists/'
+job_directory = home_dir + '/output/{}/'.format(args.run_name)
 
 file_handle = open( drug_list_file )
 
@@ -70,7 +68,7 @@ for line in file_handle:
 							if normal_finish == 1:
 								continue
 
-						cmd_str = '$python ' + dir_name + '/' + 'MAML_DRUG.py --tissue ' + tissue + ' --drug ' + gene + ' --K 10 --num_trials 20' + ' --tissue_num ' + tissue_num + ' --meta_batch_size 10 --meta_lr ' + meta_lr + ' --inner_lr ' + inner_lr + ' --layer ' + layer + ' --run_name ' + args.run_name + ' > ' + log_file
+						cmd_str = '$python ' + home_dir + '/tcrp/model/' + 'MAML_DRUG.py --tissue ' + tissue + ' --drug ' + gene + ' --K 10 --num_trials 20' + ' --tissue_num ' + tissue_num + ' --meta_batch_size 10 --meta_lr ' + meta_lr + ' --inner_lr ' + inner_lr + ' --layer ' + layer + ' --run_name ' + args.run_name + ' > ' + log_file
 						cmd_list.append( cmd_str )						
 
                 cmd_list.append('')
@@ -82,7 +80,7 @@ subcommand_directory = cmd_folder + "subcommands"
 os.system("mkdir -p {}".format(subcommand_directory))
 with open(subcommand_directory + '/' + 'subcommands_MAML_{}{}.sh'.format(job, job_id), 'w') as f:
 	f.write('#!/bin/bash\n')
-	f.writelines("python=/cellar/users/shfong/bin/miniconda3/envs/tcrp/bin/python\n")
+	f.writelines("python={}\n".format(sys.executable))
 	f.writelines('\n'.join(cmd_list) + '\n')
 
 
@@ -102,7 +100,6 @@ file_handle.writelines("#SBATCH --partition=nrnb-gpu\n")
 file_handle.writelines("#SBATCH --account=nrnb-gpu\n")
 file_handle.writelines("#SBATCH --gres=gpu:1\n\n")
 
-#file_handle.writelines("python=/cellar/users/samsonfong/bin/miniconda/envs/tcrp/bin/python\n")
 file_handle.writelines("/usr/bin/bash {}/subcommands_MAML_{}{}.sh\n".format(subcommand_directory, job, job_id))
 
 file_handle.close()

@@ -18,16 +18,14 @@ from score import *
 from inner_loop import InnerLoop
 from mlp import mlp
 
-# Training settings
-parser = argparse.ArgumentParser()
-#work_dic = '/share/data/jinbodata/siqi/Cancer_Drug_Xenograft/'
-#data_dic = '/share/data/jinbodata/siqi/Cancer_Drug_Xenograft/tissue_test_data/'
-#work_dic = '/cellar/users/samsonfong/Projects/tcrp-v2/from-ma/cell_line_lists/'
-work_dic = '/mnt/beegfs/users/shfong/projects/TCRP-refactored/tcrp-original/data/cell_line_lists/'
-#data_dic = '/cellar/users/samsonfong/Projects/tcrp-v2/from-ma/drug_feature/'
-data_dic = '/mnt/beegfs/users/shfong/projects/TCRP-refactored/tcrp-original/data/drug_feature/'
 filepath = os.path.realpath(__file__)
 dir_name = os.path.dirname(filepath)
+home_dir = os.path.dirname(os.path.dirname(dir_name))
+work_dic = home_dir + '/data/cell_line_lists/'
+data_dic = home_dir + '/data/drug_feature/'
+
+# Training settings
+parser = argparse.ArgumentParser()
 
 parser.add_argument('--tissue', type=str, default='UPPER_AERODIGESTIVE_TRACT', help='Validation tissue, using the rest tissues for training')
 parser.add_argument('--drug', type=str, default='AC220', help='Treated drug')
@@ -53,7 +51,7 @@ parser.add_argument('--run_name', type=str, default='run', help='Run name')
 
 args = parser.parse_args()
 
-job_directory = dir_name + '/output/{}/'.format(args.run_name)
+job_directory = home_dir + '/output/{}/'.format(args.run_name)
 
 args.cuda = not args.no_cuda and torch.cuda.is_available()
 K = args.K

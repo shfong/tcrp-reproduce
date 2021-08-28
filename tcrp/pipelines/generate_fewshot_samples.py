@@ -34,22 +34,22 @@ import sys
 import torch.nn as nn
 import pickle
 import copy
-from data_loading import *
-from utils import *
-from score import *
-from inner_loop import InnerLoop
-from mlp import mlp
+
+filepath = os.path.realpath(__file__)
+dir_name = os.path.dirname(filepath)
+sys.path.append(os.path.dirname(dir_name))
+home_dir = os.path.dirname(os.path.dirname(dir_name))
+
+from model.data_loading import *
+from model.utils import *
+from model.score import *
+from model.inner_loop import InnerLoop
+from model.mlp import mlp
 
 # Training settings
 parser = argparse.ArgumentParser()
-#work_dic = '/share/data/jinbodata/siqi/Cancer_Drug_Xenograft/'
-#data_dic = '/share/data/jinbodata/siqi/Cancer_Drug_Xenograft/tissue_test_data/'
-#work_dic = '/cellar/users/samsonfong/Projects/tcrp-v2/from-ma/cell_line_lists/'
-work_dic = '/mnt/beegfs/users/shfong/projects/TCRP-refactored/tcrp-original/data/cell_line_lists/'
-#data_dic = '/cellar/users/samsonfong/Projects/tcrp-v2/from-ma/drug_feature/'
-data_dic = '/mnt/beegfs/users/shfong/projects/TCRP-refactored/tcrp-original/data/drug_feature/'
-filepath = os.path.realpath(__file__)
-dir_name = os.path.dirname(filepath)
+work_dic = home_dir + '/data/cell_line_lists/'
+data_dic = home_dir + '/data/drug_feature/'
 print(dir_name)
 print(__file__)
 
@@ -64,7 +64,7 @@ parser.add_argument('--run_name', type=str, default='run', help='Run name')
 
 args = parser.parse_args()
 
-job_directory = dir_name + '/output/{}/'.format(args.run_name)
+job_directory = home_dir + '/output/{}/'.format(args.run_name)
 
 K = args.K
 num_trials = args.num_trials

@@ -28,6 +28,7 @@ print home_dir
 
 n_gpus = 20
 
+run_mode = "tcrp" # "tcrp" or "baseline"
 run_name = "210803_drug-baseline-models"
 out_directory = home_dir + '/output/' + run_name
 task_directory = out_directory + '/' + "tasks"
@@ -56,21 +57,22 @@ fewshot_data_path = "/mnt/beegfs/users/shfong/projects/TCRP-refactored/tcrp-orig
 
 for i, (a, b) in enumerate(zip(priority_chunked, remaining_drugs_chunked)):
     _drugs = a + b
-    print a
-    print b
     drug_input_file = task_directory + '/drugs_input_{}'.format(i)
     with open(drug_input_file, 'w') as f: 
         f.write('\n'.join(_drugs))
 
-    cmd = ['python', 'generate_MAML_job_cv.py', '--run_name', run_name, '--drug_list_file', drug_input_file, '--job_id', str(i), '--job', 'drugs']
-    cmd = ' '.join(cmd)
-    print cmd
-    os.system(cmd)
 
-    cmd = ['python', dirname + '/generate_baseline_job_cv.py', '--run_name', run_name, '--drug_list_file', drug_input_file, '--job_id', str(i), '--job', 'drugs', '--fewshot_data_path', fewshot_data_path]
-    cmd = ' '.join(cmd)
-    print cmd
-    os.system(cmd)
+    if run_mode == "tcrp": 
+        cmd = ['python', 'generate_MAML_job_cv.py', '--run_name', run_name, '--drug_list_file', drug_input_file, '--job_id', str(i), '--job', 'drugs']
+        cmd = ' '.join(cmd)
+        print cmd
+        os.system(cmd)
+
+    elif run_mode == "baseline": 
+        cmd = ['python', dirname + '/generate_baseline_job_cv.py', '--run_name', run_name, '--drug_list_file', drug_input_file, '--job_id', str(i), '--job', 'drugs', '--fewshot_data_path', fewshot_data_path]
+        cmd = ' '.join(cmd)
+        print cmd
+        os.system(cmd)
 
 
-
+    break
