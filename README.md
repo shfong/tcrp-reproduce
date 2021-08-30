@@ -6,7 +6,7 @@ End-to-end run is quite completely glued together yet and will require a little 
 
 ### Gathering data
 
-This part of the pipeline is not automated yet. 
+This part of the pipeline is not automated yet. The raw data will need to be downloaded from DepMap, and the transformed data are generated in with a jupyter notebook `tcrp/data_preparation/process_sanger_drug_cell_line.ipynb`. This notebook will generate a series of pickled files and numpy compressed files that the following steps will be dependent on. 
 
 ### TCRP complete run
 

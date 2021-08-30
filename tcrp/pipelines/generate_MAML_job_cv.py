@@ -71,7 +71,7 @@ for line in file_handle:
 						cmd_str = '$python ' + home_dir + '/tcrp/model/' + 'MAML_DRUG.py --tissue ' + tissue + ' --drug ' + gene + ' --K 10 --num_trials 20' + ' --tissue_num ' + tissue_num + ' --meta_batch_size 10 --meta_lr ' + meta_lr + ' --inner_lr ' + inner_lr + ' --layer ' + layer + ' --run_name ' + args.run_name + ' > ' + log_file
 						cmd_list.append( cmd_str )						
 
-                cmd_list.append('')
+				cmd_list.append('')
 
 file_handle.close()
 
