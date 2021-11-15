@@ -1,5 +1,5 @@
 # tcrp-original
-TCRP codebase that adheres to the original code as much as possible
+TCRP codebase that adheres to the original code as much as possible. For high level questions regarding TCRP, check out the [TCRP FAQ](https://github.com/shfong/tcrp-reproduce/blob/public/tcrp-faq.md).
 
 ## Instructions for a complete run
 End-to-end run is quite completely glued together yet and will require a little bit of manual work. 
@@ -22,6 +22,3 @@ Edit `prepare_complete_run.py`. Change `run_mode` variable to `baseline` to run 
 
 ## Parsing results
 The results are all embedded as logs in `output/{RUN NAME}/run-logs/{DRUG}/{TISSUE}`. The log will specify the selected epoch for that hyperparameter and the correspond test performance. Additional code will be needed to gather the best performance to select the final performance for task.
-
-The pickled file `tcrp-all-performance.pkl` can be found [here](https://www.dropbox.com/s/x077szjdlqadtf9/tcrp-all-performance.pkl?dl=0). 
-
