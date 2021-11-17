@@ -1,5 +1,5 @@
-# tcrp-original
-TCRP codebase that adheres to the original code as much as possible. For high level questions regarding TCRP, check out the [TCRP FAQ](https://github.com/shfong/tcrp-reproduce/blob/public/tcrp-faq.md).
+# tcrp-reproduce
+Refactored TCRP codebase with improved organization and additional code for data transformation and model selection. For high level questions regarding TCRP, check out the [TCRP FAQ](https://github.com/shfong/tcrp-reproduce/blob/public/tcrp-faq.md).
 
 ## Instructions for a complete run
 End-to-end run is quite completely glued together yet and will require a little bit of manual work. 
