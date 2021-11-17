@@ -1,6 +1,6 @@
-# TCRP FAQ
+# TCRP Frequently Asked Questions (FAQ) List
 
-The following is a list of questions, and answers, that we have frequently received. This is a living document, and we will be updating this repository as we continue to research in applying few-shot learning algorithms to biomedical problems.
+The following is a list of commonly asked questions, along with brief answers. This is a living document, which is updated continually as we and others research the application of few-shot learning to biomedical problems. 
 
 ## Learning problem
 
