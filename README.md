@@ -1,5 +1,5 @@
 # tcrp-reproduce
-Refactored TCRP codebase with improved organization and additional code for data transformation and model selection. For high level questions regarding TCRP, check out the [TCRP FAQ](https://github.com/shfong/tcrp-reproduce/blob/public/tcrp-faq.md).
+Refactored TCRP codebase with improved organization and additional code for data transformation and model selection. The original codebase can be accessed [here](https://github.com/idekerlab/TCRP). For high level questions regarding TCRP, check out the [TCRP FAQ](https://github.com/shfong/tcrp-reproduce/blob/public/tcrp-faq.md). 
 
 ## Instructions for a complete run
 End-to-end run is quite completely glued together yet and will require a little bit of manual work. 
