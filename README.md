@@ -22,3 +22,7 @@ Edit `prepare_complete_run.py`. Change `run_mode` variable to `baseline` to run 
 
 ## Parsing results
 The results are all embedded as logs in `output/{RUN NAME}/run-logs/{DRUG}/{TISSUE}`. The log will specify the selected epoch for that hyperparameter and the correspond test performance. Additional code will be needed to gather the best performance to select the final performance for task.
+
+## Reusability efforts
+
+Emily So, from the Haibe-Kains lab, has reproduced and extended TCRP. Their repository can be found [here](https://github.com/bhklab/TCRP_Reusability_Report).
