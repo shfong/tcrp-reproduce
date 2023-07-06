@@ -25,4 +25,4 @@ The results are all embedded as logs in `output/{RUN NAME}/run-logs/{DRUG}/{TISS
 
 ## Reusability efforts
 
-Emily So, from the Haibe-Kains lab, has reproduced and extended TCRP. Their repository can be found [here](https://github.com/bhklab/TCRP_Reusability_Report).
+Emily So, from the Haibe-Kains lab, has reproduced and extended TCRP. Their repository can be found [here](https://github.com/bhklab/TCRP_Reusability_Report). A runnable version is also available [here](https://codeocean.com/capsule/8411716/tree/v2).
